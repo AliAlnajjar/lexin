@@ -1,44 +1,46 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
  */
 
 import React, {Component} from 'react';
-import { View, Text,Button,StyleSheet } from "react-native";
+import { TouchableOpacity,Button,View,Text,StyleSheet } from "react-native";
 import { createDrawerNavigator, createStackNavigator } from "react-navigation";
-import SettingsScreen from './Settings'
-import RLV from '../components/RLV'
+import SettingsScreen from './Settings';
+import RLV from '../components/RLV';
+import { HeaderBackButton } from 'react-navigation';
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 
-class HomeScreen extends React.Component {
+
+class HomeScreen extends Component {
   render() {
     return (
-    <View style={{flex: 1, backgroundColor:'#456990'}}>
+    <View style={{flex: 1, backgroundColor:'#FFFFFF',marginBottom:3}}>
       <View style={{ flex: 1, backgroundColor:'#D24929' ,alignItems: "center", justifyContent: "center" }}></View>
-      <View style ={{flex: 13, backgroundColor:'#ddd',alignItems: "center", justifyContent: "center"}}>
-       <RLV ref ="ff" style ={{flex: 1,hieght: 400,backgroundColor:'#D24929'}}/>
-       <Button title = "press"onPress = { () => {this.refs.ff.fetchMoreData();}}/>
+      <View style ={{flex: 15, backgroundColor:'lightgrey',width:"100%",alignItems: "center", justifyContent: "center",marginBottom : 20}}>
+       <Button onPress = {()=> this.props.navigation.navigate("Settings")} title="Press Me"> Settings</Button>
+       <RLV style ={{flex: 1, backgroundColor:'lightgrey'}}/>
       </View>
     </View>
     );
   }
 }
 
+export default  HomeStackNavigator = createStackNavigator(
+    {
+      Home     : {
+        screen: HomeScreen,
 
-const HomeStackNavigator = createStackNavigator(
-    {
-      Home     : {screen: HomeScreen},
-      Settings : {screen: SettingsScreen} 
-    },
-    {
-      //headerMode:'none',
-      defaultNavigationOptions: ({ navigation }) => {
-        return {
+        navigationOptions: ({ navigation }) => {
+          return {
             headerLeft: (
-                <Text> ... </Text>
+              <TouchableOpacity onPress={() => navigation.navigate("Settings")}>
+                <Icon name="menu" color = "#FFFFFF"size={36} style={{ padding: 10 }} />
+              </TouchableOpacity>
+            ),
+            headerRight: (
+              <TouchableOpacity onPress={() => alert(navigation)}>
+                <Icon name="translate" color = "#FFFFFF"size={36} style={{ padding: 10 }} />
+              </TouchableOpacity>
             ),
             title: "Lexin",
             headerStyle: {
@@ -47,18 +49,46 @@ const HomeStackNavigator = createStackNavigator(
             },
             headerTintColor: '#FFFFFF',
             headerTitleStyle: {
-                fontSize: 35,
+                fontSize: 40,
                 fontFamily:"Righteous",
             }, 
-        };
+          };
+        }
+      },
+      Settings : {
+        screen: SettingsScreen,
+
+        navigationOptions: {
+          headerLeft: HeaderBackButton,
+          title: "Settings",
+          headerStyle: {
+              backgroundColor: '#D24929',
+              borderBottomWidth: 0,
+          },
+          headerTintColor: '#FFFFFF',
+          headerTitleStyle: {
+              fontSize: 25,
+          },         
+        }
+      } 
+    },
+    {
+      defaultNavigationOptions: ({ navigation }) => {
+        return {
+             headerBackTitle : null,
+         };
       }
     }
 );
-export default  HomeDrawer = createDrawerNavigator({
-  HomeStack: {
-    screen: HomeStackNavigator,
-  },
-});
+// export default  HomeDrawer = createDrawerNavigator({
+//   HomeStack: {
+//     screen: HomeStackNavigator,
+//     navigationOptions:{
+//       drawerLabel: 'Home',
+//     }
+//   },
+  
+// });
 
 //####################################
 //####################################

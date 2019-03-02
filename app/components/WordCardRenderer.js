@@ -32,14 +32,14 @@ export class WordCardRenderer extends React.Component {
           backgroundColor: 'lightgrey',
         }}>
         <Image
-          ref={ref => {
-            this.imageRef = ref;
-          }}
+          // ref={ref => {
+          //   this.imageRef = ref;
+          // }}
           style={{
             flex: 1,
           }}
           onLoad={this.handleOnLoad}
-          source={{ uri: this.props.imageUrl }}
+          //source={{ uri: this.props.imageUrl }}
         />
       </View>
     );

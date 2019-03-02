@@ -1,4 +1,4 @@
-var HTMLParser = require('fast-html-parser');
+// var HTMLParser = require('fast-html-parser');
 //const cheerio = require('cheerio');
 
 export default class Parser{
@@ -6,9 +6,10 @@ export default class Parser{
     //     //...
     // }
     static parse = function (document) {
-        var doc = HTMLParser.parse(document)
-        var trs = doc.querySelector('tr')
-        return trs.text;
+        return document;
+        // var doc = HTMLParser.parse(document)
+        // var trs = doc.querySelector('tr')
+        // return trs.text;
 
 
         // const $ = cheerio.load(document);
